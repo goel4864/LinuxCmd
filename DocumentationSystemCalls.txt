@@ -1,0 +1,161 @@
+AUTHOR : Akanksha Goel (02)
+COURSE : Advance Operating System 
+
+This is a documentation for the modular program written in C that accepts only command-line arguments to demonstrate system calls in UNIX.
+-> Name of program : main.c
+-> Instructions to run a file
+(i) Compile a file : gcc main.c -o mainFile
+(ii) Run a file    : ./mainFile [Command] [arguments...]
+
+-------------------------------------------------------------------------------------------------------------
+     F I L E   M E N U                                                          C O M M A N D               |
+-------------------------------------------------------------------------------------------------------------             
+     Module to create a file                                                    create                      |
+     Module to create a Named file                                              createNamed                 |
+     Module to read from a file                                                 read                        |
+     Module to write to a file                                                  write                       |
+     Module to get statistical information about a file                         display                     |
+     Module to copy a source file to destination file using Unnamed pipe        copyFileUsingUnnamedPipe    |
+     Module to read from Named pipe                                             readFromNamedPipe           |
+     Module to write to Named pipe                                              writeToNamedPipe            |
+------------------------------------------------------------------------------------------------------------
+
+MODULES
+
+*******************************************************************************
+1.Module to create a file : create.c
+
+Instruction : ./mainFile create [filename] [permission]
+
+int create_file(const char *path, int mode) {...}
+
+To create a regular file , where a user can specify   
+Parameters
+(i) path      the name of the file to create
+(ii) mode      the permissions to set for the file using mode bits
+
+Returns
+0 on success, -1 on failure
+
+
+*******************************************************************************
+2.Module to create a Named Pipe : named_pipe.c
+
+Instruction : ./mainFile read [filename] [offset] [size]
+
+int createNamed(const char *path, int mode) {...}
+
+To create a named pipe , where a user can specify   
+Parameters
+(i) path      the name of the file to create
+(ii) mode      the permissions to set for the file using mode bits
+
+Returns
+0 on success, -1 on failure
+
+
+*******************************************************************************
+3.Module to read a file : read.c
+
+Instruction : ./mainFile read [filename] [offset] [size]
+
+long read_file(const char *path, int size, int offset){...}
+
+To read data from a file, where a user can specify 
+Parameters
+(i) path            the name of the file to read
+(ii) size           the amount of data to read (in bytes) 
+(iii) offset        from where to read the data in the file
+
+Returns
+Total Number of Bytes successfully readed on success , -1 on failure
+
+
+*******************************************************************************
+4.Module to write to a file : write.c
+
+Instruction : ./mainFile write [filename] [offset] [data] [size]
+
+void write_file(const char *path, const char *data, int size, int offset) {...}
+
+To write data to a file, where a user can specify 
+Parameters
+(i) path            the name of the file to read
+(ii) data           the data to be written
+(ii) size           the amount of data to read (in bytes) 
+(iv) offset         from where to read the data in the file
+
+Returns
+None
+
+*******************************************************************************
+5.Module to provide the statstical information of a file : display.c
+
+Instruction : ./mainFile display [filename]
+
+void display_file_info(const char *path)
+
+To display all information about a file , where a user can specify 
+Parameters
+(i) path            the name of the file to read
+
+Returns
+File statstical Information that includes
+(i)Ownership Detais : Owner Name ; Owner Id ; Group Name ; Group Id
+(ii)File Details : File Permissions , File Size , Link Count
+(iii)Inode Details  : Inode Number , Device Number , Block Number
+(iv)Time Stamps Details: Last Access Time ; Last Modification Time ; Last Status Change Time
+
+*******************************************************************************
+6.Module to copy a source file to destination file using Unnamed pipe : unnamed_pipe.c
+
+Instruction : ./mainFile createNamed [filename] [permission]
+
+int copyFileUsingUnnamedPipe(char *src, char *dest)
+
+Create an unnamed pipe designed for copying a file's content (say 'a.txt') to another file ('b.txt').  , where a user can specify 
+Parameters
+(i) src            the name of a source file
+(ii) dest          the name of a destination file
+    
+Returns 
+0 on success, -1 on failure
+
+*******************************************************************************
+7.Use a named pipe to help communicate between two processes, 
+where a user can specify the purpose of the pipe (i.e. reading or writing) ,
+(i)  Module to read from Named pipe
+(ii) Module to write to Named pipe
+--------------------------------------------------------------------------------
+7.1 Module to read from Named pipe : named_pipe.c
+
+Instruction : ./mainFile readFromNamedPipe [pipename] [size]
+
+int readFromNamedPipe(const char *pipeName, int size) 
+
+To read data from a Named Pipe , where a user can specify
+Parameters
+(i) pipeName            the name of the pipe to read
+(ii) size               the amount of data to read (in bytes)
+    
+Returns 
+0 on success, -1 on failure
+
+--------------------------------------------------------------------------------
+7.2. Module to write to Named pipe : named_pipe.c
+
+Instruction : ./mainFile writeToNamedPipe [pipename] [data]
+
+int writeToNamedPipe(const char *pipeName, const char *data) 
+
+To wite data to a Named Pipe , where a user can specify
+Parameters
+(i) pipeName            the name of the pipe to read
+(ii) data               the data to be wriiten to named pipe (in bytes)
+    
+Returns 
+0 on success, -1 on failure
+
+*******************************************************************************
+
+This is the end of the documentation
